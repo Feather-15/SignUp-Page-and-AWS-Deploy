@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LoginSignUp-Page</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js"></script>
+    <script>
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDS2Z1G4hq7dOclKxQAvBF1K4cDnA-K6m0",
+            authDomain: "jinda-bad.firebaseapp.com",
+            databaseURL: "https://jinda-bad-default-rtdb.firebaseio.com",
+            projectId: "jinda-bad",
+            storageBucket: "jinda-bad.appspot.com",
+            messagingSenderId: "607833370966",
+            appId: "1:607833370966:web:7905f83bc31b28efeaa6f7",
+            measurementId: "G-M57BZXJGWB"
+          };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+</head>
+
+<body>
+  <div class="form">
+
+    <ul class="tab-group">
+      <li class="tab active"><a href="#signup">Sign Up</a></li>
+      <li class="tab"><a href="#login">Log In</a></li>
+    </ul>
+
+    <div class="tab-contet">
+      <div>
+        <h1>Welcome Back!</h1>
+
+        <form id="login_form">
+
+          <div class="field-wrap">
+            <label>
+              Email Address<span class="req">*</span>
+            </label>
+            <input type="email" id="login_email" required autocomplete="off" />
+          </div>
+
+          <div class="field-wrap">
+            <label>
+              Password<span class="req">*</span>
+            </label>
+            <input type="password" id="login_password" required autocomplete="off" />
+          </div>
+
+          <p class="forgot"><a href="#">Forgot Password?</a></p>
+
+          <button class="button button-block" type="submit">Log In</button>
+
+        </form>
+      </div>
+    </div><!-- tab-content -->
+
+  </div> <!-- /form -->
+  <script>
+    document.getElementById('login_form').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent form submission
+      var login_email_elem = document.getElementById('login_email').value;
+      var login_passw_elem = document.getElementById('login_password').value;
+
+      var database = firebase.database();
+
+            database.ref('users/' + "newuser").set({
+              username: login_email_elem,
+              passWord: login_passw_elem
+                }).then(console.log("---- DATA PUBLISHED -----"));
+    });
+  </script>
+</body>
+
+</html>
